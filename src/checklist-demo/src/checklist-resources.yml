@@ -1,0 +1,38 @@
+# Every resource name starts with one of these prefixes:
+# label. Labels like identifiers for fields. Usually not a full sentence but only a few words.
+# title. A label that is the header/title of a section.
+# command. A label that is a user action.
+# message. Information for the user. Usually full sentences.
+# error. A message that is an error.
+# question. A message that is a question.
+# format. A date/time format.
+
+# Following the suffix is a shortened version of the string content.
+
+{
+  messageFormSubmit: "Save",
+  labelService: "Servicecheck done at: ",
+  labelLamella: "Check and clean the evaporator fins",
+  labelDuct: "Check and clean the air duct",
+  labelFilter: "Clean the dirt filter",
+  labelDevice: "Device",
+  labelDefrost: "Checked defrosting",
+  labelSetting: "Checked governor settings",
+  labelNotes: "Notes",
+  labelChecklist: "Checklist",
+  messageOnUpdated: "Successfully saved",
+  formatDate: "YYYY-MM-DD",
+  error_field_isRequired: "Field is required.",
+  messageOnDelete: "Deleted successfully",
+  titleChecklist: "Checklist",
+  labelCheck: "Check",
+  labelSign: "Signing",
+  labelSetAllOk: "Set everything to okay",
+  labelMaintenance: "Maintenance",
+  labelHeatPumpMaintenance: "Maintenance heatpump",
+  stateNoAddress: "No address",
+  editChecklist: "Checklist",
+  checklistList: "Checklistlist",
+  labelShortcutCheck: "Checklist",
+  address: "Address"
+}

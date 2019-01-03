@@ -1,0 +1,144 @@
+{
+  "name": "demo-github",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "description": "",
+  "author": "Johannes Goehr <johannes.goehr@mobilexag.de>",
+  "scripts": {
+    "postinstall": "rimraf node_modules/.cache",
+    "clean": "rimraf www/*",
+    "lint": "lint src",
+    "init": "rimraf platforms www hooks plugins && mkdirp platforms www hooks plugins && cordova prepare",
+    "copy:db": "cpr mip.db www/mip.db -o",
+    "prebuild": "npm run clean &&  npm run copy:db",
+    "build": "webpack --progress",
+    "prebuild:release": "npm run prebuild && npm run copy:db",
+    "build:device": "webpack --progress --env.device && npm run copy:db",
+    "build:release": "webpack --progress --env.production",
+    "build:analyze": "webpack --progress --env.production --env.analyze",
+    "build:android": "cordova build android --release --device -- --storePassword=$CROSSMIP_KEYSTORE_PASSWORD --password=$CROSSMIP_KEY_PASSWORD",
+    "build:ios": "cordova build ios --release --device",
+    "build:platforms": "npm run build:ios && npm run build:android",
+    "start-webpack-dev-server": "webpack-dev-server --progress --content-base www --host :: --port 8080",
+    "start-webpack-dev-server:hot": "webpack-dev-server --progress --content-base www --host :: --port 8080 --hot --env.hot",
+    "start-win": "start npm run start-webpack-dev-server",
+    "start-unix": "npm run start-webpack-dev-server",
+    "start": "npm run start:hot",
+    "start:cold": "concurrently --kill-others \"npm run start-webpack-dev-server\"",
+    "start:hot": "concurrently --kill-others \"npm run start-webpack-dev-server:hot\"",
+    "webpack:watch": "webpack --progress --watch"
+  },
+  "mobilex": {
+    "localization": {
+      "resourceLocales": [
+        "de",
+        "en"
+      ],
+      "fallbackLocales": [
+        "de",
+        "en",
+        "-"
+      ]
+    },
+    "serverBaseURL": "https://demo.mobilexag.de/",
+    "tenants": [
+      {
+        "value": 1,
+        "text": "German",
+        "default": true
+      },
+      {
+        "value": 2,
+        "text": "English"
+      }
+    ],
+    "sdmURL": "http://maven-repository.mobilex.intra/service/local/repositories/releases/content/de/mobilexag/mip/sdm/mip-sdm-schema/6.0.0/mip-sdm-schema-6.0.0-schema-json.json",
+    "databaseMockUrl": "https://dev.mobilexag.de"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
+    "@mobilex/database": "^7.0.0",
+    "@mobilex/database-local": "^7.2.0",
+    "@mobilex/diagnostic-upload": "^5.0.0",
+    "@mobilex/externals": "^2.3.1",
+    "@mobilex/localization": "^4.0.0",
+    "@mobilex/log": "^3.1.1",
+    "@mobilex/overlay": "^2.1.0",
+    "@mobilex/push": "^4.0.0",
+    "@mobilex/resources": "^2.0.0",
+    "@mobilex/routes": "^7.0.0",
+    "@mobilex/tenants": "^2.0.1",
+    "@mobilex/time-confirmation-list": "^8.1.0",
+    "@mobilex/ui-header": "^5.0.3",
+    "@mobilex/ui-input": "^8.2.0",
+    "@mobilex/ui-theme": "^3.0.4",
+    "@mobilex/web-storage": "^6.2.1",
+    "concurrently": "^3.5.0",
+    "cordova-android": "^6.2.3",
+    "cordova-ios": "^4.4.0",
+    "cordova-plugin-camera": "~2.4.0",
+    "cordova-plugin-dbcopy": "^2.0.0",
+    "cordova-plugin-device": "~1.1.5",
+    "cordova-plugin-file": "~4.3.2",
+    "cordova-plugin-file-transfer": "~1.6.2",
+    "cordova-plugin-whitelist": "1",
+    "cordova-sqlite-evplus-ext-free": "git+https://github.com/mobilexag/cordova-sqlite-evplus-ext-free.git",
+    "core-js": "^2.5.7",
+    "intl": "^1.2.5",
+    "lodash-es": "^4.17.11",
+    "moment": "2.14.1",
+    "os": "^0.1.1",
+    "react": "16.4.x",
+    "react-dom": "16.4.x",
+    "react-hot-loader": "^4.3.11",
+    "scriptjs": "^2.5.8",
+    "whatwg-fetch": "2.0.2"
+  },
+  "devDependencies": {
+    "@mobilex/download-sdm-hook": "^1.2.0",
+    "@mobilex/generate-indexhtml-hook": "^1.1.1",
+    "@mobilex/lint": "^4.1.0",
+    "@mobilex/resource-loader": "^5.0.0",
+    "@mobilex/test": "^3.3.1",
+    "@mobilex/webpack-config-mip": "^2.0.0",
+    "@mobilex/webpack-resource-splitter-plugin": "^6.0.0",
+    "babel-loader": "^8.0.4",
+    "clone": "^2.1.1",
+    "cordova": "^8.1.2",
+    "cordova-hot-code-push-cli": "1.1.1",
+    "cpr": "^2.2.0",
+    "file-loader": "^3.0.1",
+    "findup-sync": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "minimist": "^1.2.0",
+    "mkdirp": "0.5.1",
+    "modernizr": "^3.5.0",
+    "mustache": "^2.3.0",
+    "mustache-loader": "^1.4.1",
+    "plugman": "^1.4.1",
+    "replace-in-file": "^2.1.0",
+    "rimraf": "^2.6.1",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14",
+    "nodemon": "1.18.4"
+  },
+  "cordova": {
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-camera": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-sqlite-evplus-ext-free": {},
+      "cordova-plugin-dbcopy": {}
+    }
+  },
+  "keywords": []
+}

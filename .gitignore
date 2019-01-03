@@ -1,0 +1,26 @@
+node_modules
+npm-debug.log
+
+# Cordova
+android_apk/*
+!android_apk/empty
+hooks
+platforms
+plugins
+www
+output/*
+
+# Mac OS X
+.DS_Store
+
+# editor files
+.vscode/
+jsconfig.json
+.sublime-gulp.cache
+sublime-gulp.log
+.idea/
+
+# Documentation
+docs
+
+# mip.db
